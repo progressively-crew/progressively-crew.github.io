@@ -44,7 +44,7 @@ const config = {
         // },
         items: [
           {
-            href: "https://github.com/mfrachet/progressively",
+            href: "https://github.com/progressively-crew/progressively",
             label: "GitHub",
             position: "right",
           },

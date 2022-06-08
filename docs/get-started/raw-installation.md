@@ -5,7 +5,7 @@
 In your favorite terminal with git installed, run the following command:
 
 ```bash
-git clone https://github.com/mfrachet/progressively
+git clone https://github.com/progressively-crew/progressively
 ```
 
 Next, you need to make sure you have a `.env` file in both the `./packages/frontend` and `./packages/backend` directories.
