@@ -7,12 +7,12 @@ const lightCodeTheme = require("prism-react-renderer/themes/github");
 const config = {
   title: "Progressively",
   tagline: "Feature flags that don't kill your website performances.",
-  url: "https://mfrachet.github.io/",
-  baseUrl: "/progressively/",
+  url: "https://progressively-crew.github.io/",
+  baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   // favicon: "img/favicon.ico",
-  organizationName: "mfrachet", // Usually your GitHub org/user name.
+  organizationName: "progressively-crew", // Usually your GitHub org/user name.
   projectName: "progressively", // Usually your repo name.
 
   presets: [
