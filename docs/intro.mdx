@@ -1,37 +1,63 @@
 ---
 sidebar_position: 1
 ---
+# The pitch
 
-import { ExampleFeatureFlag } from "../src/components/ExampleFeatureFlag";
+Progressively is a minimal and self hosted feature flagging and A/B testing solution that does not kill your web app performances.
 
-# Introduction
+- The project is available here: https://github.com/progressively-crew/progressively
+- The documentation is available here: https://progressively-crew.github.io/
 
-Progressively is a self-hosted feature flag solution focusing on lightweight client side impact, accessibility and with no tracking.
+> ℹ️ Keep in mind that it is in Alpha. We need people to use it and give feedbacks so that we can get more confidence and fix the existing bugs.
 
-## Whats is a feature flag service?
+## What problem does it aim to solve?
 
-It's a service that allows to show or hide functionalities on the fly for a specific set of users. There are multiple existing solutions on the market such as [LaunchDarkly](https://launchdarkly.com/), [Split](https://www.split.io/), [Unleash](https://www.getunleash.io/) and [many others](https://devcycle.com/blog/best-feature-flags-of-2022)...
+### Progressive rollout
 
-See the following example where the left side is a dashboard managing feature flags and the right side is a client application showing content based on the toggle value:
+Feature flagging is a technic allowing multiple variations of a given page / portion of page (depending on criteria) to be displayed to a specific portion of an audience.
 
-<ExampleFeatureFlag />
+For instance, it's possible to display a specific variations to 20% of an audience and display the other variant to 80% of the audience (you can customize which users are supposed to see a variation, even for anonymous users).
 
-## Whats are Progressively's features?
+With that in mind, it's possible to gradually rollout a new feature to your users and gather feedback the sooner (you can even test a new feature in production without other people seeing it). And it's also possible to hide a whole functionality if it throws tons of error by toggleing it off in the tool's dashboard.
 
-- Projects / environments / flags / strategies management
-- Rollout strategies (on/off, percentage based, by fields etc...)
-- Websocket based ("real time" updates)
-- SSR friendly
+This kind of tools aim to be practical and to fluidify the release processes.
 
-_Keep in mind that the project is pretty new and that new features will come with time._
+### Very small performance impact
 
-## What is Progressively composed of?
+Third party tools for transversal needs (analytics, feature flags, a/b testing etc...) can significantly decrease the speed of web applications. It's not uncommon to hear that some mainstream analytic tools or dynamic script tags loader kill web app performances for multiple reasons:
+- they _may_ be blocking the network waterfall
+- they can keep the main thread busy during their execution (the bigger, the longer)
+- they can bloat application bundle (making it longer to download and start the app later)
 
-- **The dashboard**, where you manage your feature flags
-- **The backend (+ APIs)**, where the computations are made
-- **SDKs** to connect your project to the backend
+Stepping back from this and analyzing a bit the state of the web, I don't think it's normal that tools which are supposed to help us are actually killing the speed of our products.
 
-<br />
-<br />
+For instance, if we take a look at the feature flagging space, there's a bunch of tools available. Here's an exhaustive list of them, and their weight included into a Nextjs application:
 
-![The dashboard showing an activated "New homepage" feature flag connected to the backend and showing the activated variant of the flag in the client application.](/img/progressively-stack.svg)
+- Launchdarkly: **14kb minified and gzipped**
+- Unleash: **7kb minified and gzipped**
+- Growthbook: **3kb minified and gzipped**
+- Flagship: **23kb minified and gzipped**
+
+You can run the audit yourself by following the steps of this repository: https://github.com/progressively-crew/progressively/tree/master/example/bundle-diffs
+
+In comparison, Progressively is **1kb minified and gzipped**.
+
+_⚠️ This might be an apple to orange comparison, so take this with caution, and try the tools to make your own opinion._
+
+Also note that progressively will provide SDKs for server side application (the JavaScript one is already working on server applications such as Nextjs or Remix). See https://github.com/progressively-crew/progressively/issues/9 for details.
+
+>The project also comes with configurations for https://fly.io/ that is a hosting solution on the edge: you can start a Progressively instance close to your user for faster load time.
+>
+>For instance, on my own Progressively instance closed to me, the flag resolution through HTTPS is around 80ms
+
+## Other things
+
+### Accessible dashboard
+
+The dashboard of Progressively is accessible for everyone, including people using ATs. Everything in the dashboard should be explicit and clear. This is a commitment. And if something seems weird or is not clear to you, please, create an issue and help us improve the tool.
+
+### No tracking
+
+Progressively aims to be reasonable in terms of data that it gathers. By default, it only stores information defined in [this database schema](https://github.com/progressively-crew/progressively/blob/master/packages/backend/prisma/schema.prisma).
+
+Also, in the future, Progressively will rely on logging and moniroting tools (Sentry, ELK or Datadog) in order to catch errors the earlier. 
